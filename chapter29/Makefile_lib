@@ -1,0 +1,22 @@
+OBJS := main.o func.o
+EXE := main.exe
+CXXFLAGS := -std=c++11 -lpthread -Wall
+LIBFUNCSO := libfunc.so
+LIBFUNA := libfunc.a
+CXX := g++
+
+$(EXE) : $(OBJS) $(LIBFUNCSO) $(LIBFUNCA)
+	$(CXX) -o $@ $^ -L./-lfunc
+main.o : main.cpp
+	$(CXX) -c $(CXXFLAGS) $< -o $@
+func.o: func.cpp
+	$(CXX) -c $(CXXFLAGS) $< -o $@
+libfunc.a: func.o
+	ar rcsv $@ $<
+libfunc.so: func.o
+	$(CXX) -shared -o $@ $<
+	cp -f $@ ./lib
+.PHONY: rebuild clean
+rebuild: clean $(EXE)
+clean:
+	rm -rf $(EXE) $(OBJS) $(LIBFUNCSO) $(LIBFUNCA)

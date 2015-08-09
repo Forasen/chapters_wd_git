@@ -1,0 +1,11 @@
+DIR := ./Debug/
+EXE := main.exe
+OBJS := func.o main.o
+LIBFUNCSO := libfunc.so
+
+CXX := g++
+CXXFLAGS := -std=c++11 -lpthread -fpic
+$(DIR)$(EXE) : $(DIR)$(OBJS) $(DIR)$(LIBFUNCSO)
+	$(CXX) -o $@ $^ -L./-lfunc
+$(DIR)$(LIBFUNCSO) : $(DIR)func.o
+	$(CXX) -shared -o $@ $^

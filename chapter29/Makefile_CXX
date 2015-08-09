@@ -1,0 +1,13 @@
+OBJS := main.o func.o
+EXE := main.exe
+$(EXE): $(OBJS)
+	$(CXX) -o $(EXE) $(OBJS)
+main.o: main.cpp
+	$(CXX) -c main.cpp
+func.o: func.cpp
+	$(CXX) -c func.cpp
+
+.PHNOY: rebuild clean
+rebuild: clean main.exe
+clean:
+	rm -rf $(OBJS) $(EXE)

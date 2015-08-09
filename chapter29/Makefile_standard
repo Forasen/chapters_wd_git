@@ -1,0 +1,8 @@
+DIR := ./debug
+EXE := $(DIR)/main.exe
+CXX := g++
+LIBS :=
+SRCS := $(wildcard *.cpp) $(wildcard *.c) $(wildcard *.cc)
+OCPP := $(patsubst %.cpp)
+CXXFLAGS  := -std=c++11 -lpthread -Wall -fpic
+
